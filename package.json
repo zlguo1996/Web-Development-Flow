@@ -1,6 +1,9 @@
 {
 	"name": "web-development-flow",
 	"displayName": "Web Development Flow",
+	"repository": {
+		"url": "https://github.com/zlguo1996/Web-Development-Flow"
+	},
 	"description": "",
 	"version": "0.0.1",
 	"engines": {

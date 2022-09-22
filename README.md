@@ -1,6 +1,6 @@
-# web-development-flow README
+# Web Development Flow
 
-This is the README for your extension "web-development-flow". After writing up a brief description, we recommend including the following sections.
+让 Web 开发更为流畅的 VS Code 插件，目标是提高其他工具与 VS Code 间的协同效率。如：将选中代码复制为gitlab链接用于分享、用typora打开markdown文件等。
 
 ## Features
 
