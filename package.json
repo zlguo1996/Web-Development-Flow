@@ -15,7 +15,7 @@
 	],
 	"activationEvents": [
 		"onCommand:web-development-flow.helloWorld",
-		"onCommand:web-development-flow.copyAsLink",
+		"onCommand:web-development-flow.copyAsNeteaseGitlabLink",
 		"onCommand:web-development-flow.openWithTypora"
 	],
 	"main": "./out/extension.js",
@@ -27,8 +27,8 @@
 				"category": "Test"
 			},
 			{
-				"command": "web-development-flow.copyAsLink",
-				"title": "Copy As Link",
+				"command": "web-development-flow.copyAsNeteaseGitlabLink",
+				"title": "Copy As Netease Gitlab Link",
 				"category": "Selection"
 			},
 			{
@@ -36,7 +36,21 @@
 				"title": "Open With Typora",
 				"category": "File"
 			}
-		]
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"command": "web-development-flow.copyAsNeteaseGitlabLink",
+					"group": "9_cutcopypaste"
+				}
+			],
+			"editor/title/context": [
+				{
+					"when": "resourceLangId == markdown",
+					"command": "web-development-flow.openWithTypora"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",

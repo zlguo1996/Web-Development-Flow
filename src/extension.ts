@@ -21,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand('web-development-flow.helloWorld', () => {
 			vscode.window.showWarningMessage('Hello World from web-development-flow!');
 		}),
-		vscode.commands.registerCommand('web-development-flow.copyAsLink', () => {
+		vscode.commands.registerCommand('web-development-flow.copyAsNeteaseGitlabLink', () => {
 			const repository = getGitRepository();
 			const activeTextEditor = vscode.window.activeTextEditor;
 			if (activeTextEditor) {
@@ -39,7 +39,12 @@ export function activate(context: vscode.ExtensionContext) {
 				vscode.env.clipboard.writeText(url);
 			}
 		}),
-		vscode.commands.registerCommand('web-development-flow.openWithTypora', () => {
+		vscode.commands.registerCommand('web-development-flow.openWithTypora', (uri) => {
+			if (uri) { // 通过context menu进入
+				cp.exec(`open -a typora ${uri}`);
+				return;
+			}
+
 			const activeTextEditor = vscode.window.activeTextEditor;
 			if (activeTextEditor) {
 				cp.exec(`open -a typora ${activeTextEditor.document.fileName}`);
