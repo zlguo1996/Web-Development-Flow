@@ -1,6 +1,6 @@
 {
-  "name": "test-vscode-extension",
-	"displayName": "test-vscode-extension",
+	"name": "web-development-flow",
+	"displayName": "Web Development Flow",
 	"description": "",
 	"version": "0.0.1",
 	"engines": {
@@ -10,14 +10,27 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:test-vscode-extension.helloWorld"
+		"onCommand:web-development-flow.helloWorld",
+		"onCommand:web-development-flow.copyAsLink",
+		"onCommand:web-development-flow.openWithTypora"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "test-vscode-extension.helloWorld",
-				"title": "Hello World"
+				"command": "web-development-flow.helloWorld",
+				"title": "Hello World",
+				"category": "Test"
+			},
+			{
+				"command": "web-development-flow.copyAsLink",
+				"title": "Copy As Link",
+				"category": "Selection"
+			},
+			{
+				"command": "web-development-flow.openWithTypora",
+				"title": "Open With Typora",
+				"category": "File"
 			}
 		]
 	},
