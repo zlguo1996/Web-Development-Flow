@@ -4,7 +4,8 @@
 	"repository": {
 		"url": "https://github.com/zlguo1996/Web-Development-Flow"
 	},
-	"description": "",
+	"description": "VS Code Plugin for Fluent Web Development",
+	"publisher": "zlguo1996",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.69.0"
