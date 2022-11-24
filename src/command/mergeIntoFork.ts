@@ -1,8 +1,16 @@
 /**
- * merge current branch to forked repository of same branch name
+ * Merge current branch to fork repository of same branch name
+ * 
+ * Use Case: 
+ *  When repository grows, we would split repository to multiple repositories by fork. 
+ *  Thus every fork would contain custom config files for independent deployment.
+ *  However, since multiple forks may reference to same file. We want to develop in the original repository.
+ * 
+ * Implementation:
+ *  This command first ask for the target fork repository path, which must exists in local disk.
+ *  Then we merge the branch of current (original) repository to the branch of same name in fork repository.
  */
 import * as vscode from 'vscode';
-import { GitErrorCodes } from './git';
 import { getGitRepository } from "./util";
 
 export function remote2RepositoryPrefix(remote: string) {
