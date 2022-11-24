@@ -1,3 +1,7 @@
+/**
+ * Copy selected lines as http link of Gitlab / Github for share
+ */
+
 import * as vscode from 'vscode';
 import { getGitRepository } from './util';
 
@@ -14,8 +18,8 @@ export function remote2Url(remote: string) {
 
 }
 
-export default function copyAsLink() {
-    const repository = getGitRepository();
+export default async function copyAsLink() {
+    const repository = await getGitRepository();
     const activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor) {
         const start = activeTextEditor.selections?.[0]?.start?.line;
@@ -28,7 +32,7 @@ export default function copyAsLink() {
             url: remote2Url(repository.state.remotes?.[0]?.fetchUrl || '')
         };
 
-        const url = `${info.url}/-/blob/${info.commit}/${info.path}#L${info.line}`;
+        const url = `${info.url}/blob/${info.commit}/${info.path}#L${info.line}`;
 
         vscode.env.clipboard.writeText(url);
     }

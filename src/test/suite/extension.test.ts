@@ -4,6 +4,7 @@ import * as assert from 'assert';
 // as well as import your extension to test it
 import * as vscode from 'vscode';
 import { remote2Url } from '../../command/copyAsLink';
+import { remote2RepositoryPrefix } from '../../command/mergeIntoFork';
 // import * as myExtension from '../../extension';
 
 suite('Extension Test Suite', () => {
@@ -33,5 +34,14 @@ suite("remote2Url", () => {
 	});
 	test('github https', () => {
 		assert.strictEqual(remote2Url('https://github.com/test/homepage.git'), 'https://github.com/test/homepage');
+	});
+});
+
+suite("remote2RepositoryPrefix", () => {
+	test('netease gitlab ssh', () => {
+		assert.strictEqual(remote2RepositoryPrefix('ssh://git@g.hz.netease.com:22222/cloudmusic-frontend/content/rn-podcast-book.git'), 'cloudmusic-frontend/content/rn-podcast-book');
+	});
+	test('netease gitlab https', () => {
+		assert.strictEqual(remote2RepositoryPrefix('https://g.hz.netease.com/cloudmusic-frontend/content/rn-podcast-book.git'), 'cloudmusic-frontend/content/rn-podcast-book');
 	});
 });

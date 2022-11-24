@@ -16,7 +16,8 @@
 	"activationEvents": [
 		"onCommand:web-development-flow.helloWorld",
 		"onCommand:web-development-flow.copyAsLink",
-		"onCommand:web-development-flow.openWithTypora"
+		"onCommand:web-development-flow.openWithTypora",
+		"onCommand:web-development-flow.mergeIntoFork"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -35,6 +36,11 @@
 				"command": "web-development-flow.openWithTypora",
 				"title": "Open With Typora",
 				"category": "File"
+			},
+			{
+				"command": "web-development-flow.mergeIntoFork",
+				"title": "Merge Branch into Fork Repository",
+				"category": "Git"
 			}
 		],
 		"menus": {
