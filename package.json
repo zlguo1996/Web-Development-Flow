@@ -6,7 +6,7 @@
 	},
 	"description": "VS Code Plugin for Fluent Web Development",
 	"publisher": "zlguo1996",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"engines": {
 		"vscode": "^1.69.0"
 	},
@@ -39,7 +39,7 @@
 			},
 			{
 				"command": "web-development-flow.mergeIntoFork",
-				"title": "Merge Branch into Fork Repository",
+				"title": "Merge Branch Into Fork Repository",
 				"category": "Git"
 			}
 		],
