@@ -3,7 +3,9 @@
  * 
  * Use Case: 
  *  When repository grows, we would split repository to multiple repositories by fork. 
- *  Thus every fork would contain custom config files for independent deployment.
+ *      Thus: 
+ *      1. every fork could contain custom config files for independent deployment.
+ *      2. every fork could update their dependencies independently.
  *  However, since multiple forks may reference to same file. We want to develop in the original repository.
  * 
  * Implementation:
