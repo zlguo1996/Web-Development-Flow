@@ -13,6 +13,7 @@
  *  Then we merge the branch of current (original) repository to the branch of same name in fork repository.
  */
 import * as vscode from 'vscode';
+import * as fs from 'fs';
 import { getGitRepository } from "./util";
 
 export default () => vscode.window.withProgress({
@@ -26,11 +27,22 @@ export default () => vscode.window.withProgress({
  */
 async function mergeIntoFork(progress: vscode.Progress<{ message?: string; increment?: number }>) {
     try {
-        const targetRepositoryName = await vscode.window.showInputBox({ // TODO dropdown
-            placeHolder: "Target Repository Name",
-            prompt: "Merge",
-            value: ''
-        });
+        const rootPath = vscode.workspace.workspaceFolders?.[0]?.uri;
+        if (!rootPath) { throw new Error('rootPath not exists'); };
+        const targetRepositoryName =
+            await vscode.window.showQuickPick(
+                new Promise<string[]>((resolve, reject) => {
+                    fs.readdir(
+                        vscode.Uri.joinPath(rootPath, '..').fsPath,
+                        (err, files) => {
+                            if (err) { reject(err); };
+
+                            resolve(files);
+                        });
+                })
+            );
+        if (!targetRepositoryName) { throw new Error('Please select target fork repository'); };
+
         const [repositoryTarget, repositorySource] = await Promise.all([getGitRepository(targetRepositoryName), getGitRepository()]);
         const branchName = repositorySource.state.HEAD?.name;
         if (!branchName) { throw new Error('Failed to get branch name of current repository'); };
