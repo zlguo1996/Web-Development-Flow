@@ -17,7 +17,8 @@
 		"onCommand:web-development-flow.helloWorld",
 		"onCommand:web-development-flow.copyAsLink",
 		"onCommand:web-development-flow.openWithTypora",
-		"onCommand:web-development-flow.mergeIntoFork"
+		"onCommand:web-development-flow.mergeIntoFork",
+		"onCommand:web-development-flow.syncFromMaster"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -40,6 +41,11 @@
 			{
 				"command": "web-development-flow.mergeIntoFork",
 				"title": "Merge Branch Into Fork Repository",
+				"category": "Git"
+			},
+			{
+				"command": "web-development-flow.syncFromMaster",
+				"title": "Sync Changes From Remote Master Branch",
 				"category": "Git"
 			}
 		],

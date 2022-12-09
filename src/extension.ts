@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 import * as cp from "child_process";
 import copyAsLink from './command/copyAsLink';
 import mergeIntoFork from './command/mergeIntoFork';
+import syncFromMaster from './command/syncFromMaster';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -24,7 +25,8 @@ export function activate(context: vscode.ExtensionContext) {
 				cp.exec(`open -a typora ${activeTextEditor.document.fileName}`);
 			}
 		}),
-		vscode.commands.registerCommand('web-development-flow.mergeIntoFork', mergeIntoFork)
+		vscode.commands.registerCommand('web-development-flow.mergeIntoFork', mergeIntoFork),
+		vscode.commands.registerCommand('web-development-flow.syncFromMaster', syncFromMaster),
 	];
 
 	disposables.forEach((disposable) => {
