@@ -33,6 +33,8 @@ async function syncFromMaster(progress: vscode.Progress<{ message?: string; incr
             throw new Error(`Merge ${defaultBranchName}: ${e.message}(${e.gitArgs?.join(' ')}) \n ${e.stderr}`);
         }
         progress.report({ message: `Merge ${defaultBranchName} success` });
+        repository.push();
+        progress.report({ message: `Push ${branchName} success` });
     } catch (e: any) {
         console.error(e);
         vscode.window.showErrorMessage(e.message);
