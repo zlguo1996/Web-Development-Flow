@@ -23,6 +23,7 @@ async function syncFromMaster(progress: vscode.Progress<{ message?: string; incr
         const defaultBranchName = 'master'; // NOTE default branch may not be master, fix later
         await repository.checkout(defaultBranchName);
         progress.report({ message: `Checkout ${defaultBranchName} success` });
+        await repository.fetch();
         await repository.pull();
         progress.report({ message: `Pull ${defaultBranchName} success` });
         await repository.checkout(branchName);
