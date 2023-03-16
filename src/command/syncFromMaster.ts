@@ -25,6 +25,7 @@ async function syncFromMaster(progress: vscode.Progress<{ message?: string; incr
         progress.report({ message: `Checkout ${defaultBranchName} success` });
         await repository.fetch();
         await repository.pull();
+        await new Promise<void>(resolve => setTimeout(resolve, 2000)); // NOTE vscode resolve when pull is not finished
         progress.report({ message: `Pull ${defaultBranchName} success` });
         await repository.checkout(branchName);
         try {
