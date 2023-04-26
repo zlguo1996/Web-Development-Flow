@@ -71,7 +71,7 @@ async function mergeIntoFork(progress: vscode.Progress<{ message?: string; incre
                 await repositoryTarget.checkout(branchName);
             }
         } catch {
-            await repositoryTarget.createBranch(branchName, true);
+            await repositoryTarget.createBranch(branchName, true, 'master');
         }
         progress.report({ message: `repositoryTarget: checkout ${branchName} success` });
 
