@@ -5,6 +5,7 @@ import * as cp from "child_process";
 import copyAsLink from './command/copyAsLink';
 import mergeIntoFork from './command/mergeIntoFork';
 import syncFromMaster from './command/syncFromMaster';
+import activateDolphinThemeExtension from './command/dolphinThemeExtension';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -32,6 +33,8 @@ export function activate(context: vscode.ExtensionContext) {
 	disposables.forEach((disposable) => {
 		context.subscriptions.push(disposable);
 	});
+
+	activateDolphinThemeExtension(context);
 }
 
 // this method is called when your extension is deactivated
