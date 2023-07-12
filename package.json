@@ -18,7 +18,11 @@
 		"onCommand:web-development-flow.copyAsLink",
 		"onCommand:web-development-flow.openWithTypora",
 		"onCommand:web-development-flow.mergeIntoFork",
-		"onCommand:web-development-flow.syncFromMaster"
+		"onCommand:web-development-flow.syncFromMaster",
+		"onLanguage:javascript",
+		"onLanguage:typescriptreact",
+		"onLanguage:typescript",
+		"onLanguage:typescriptreact"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
