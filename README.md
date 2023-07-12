@@ -4,13 +4,9 @@
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+1. 跨工程分支合并：合并某工程（A）的分支到另外一个工程（B）的同名分支下（其中 B fork 自 A）。
+2. 复制代码为链接：选中指定文件的特定行或多行，右键点击 Copy As Link，即可复制其在远程git仓库的链接。支持Github、Gitlab、私有化Gitlab。
+3. 海豚主题支持：输入'theme.'，即可获得所有主题token的代码提示，数据实时和海豚文档的token同步。
 
 ## Requirements
 
