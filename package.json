@@ -20,7 +20,7 @@
 		"onCommand:web-development-flow.mergeIntoFork",
 		"onCommand:web-development-flow.syncFromMaster",
 		"onLanguage:javascript",
-		"onLanguage:typescriptreact",
+		"onLanguage:javascriptreact",
 		"onLanguage:typescript",
 		"onLanguage:typescriptreact"
 	],
