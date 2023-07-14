@@ -26,34 +26,6 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"languages": [
-			{
-				"id": "javascript",
-				"aliases": [
-					"JavaScript",
-					"javascript",
-					"js"
-				],
-				"extensions": [
-					".js",
-					".es6",
-					".jsx",
-					".mjs"
-				]
-			},
-			{
-				"id": "typescript",
-				"aliases": [
-					"TypeScript",
-					"typescript",
-					"ts"
-				],
-				"extensions": [
-					".ts",
-					".tsx"
-				]
-			}
-		],
 		"commands": [
 			{
 				"command": "web-development-flow.helloWorld",
