@@ -89,7 +89,13 @@ async function mergeIntoFork(progress: vscode.Progress<{ message?: string; incre
         }
         progress.report({ message: `repositoryTarget: push ${branchName} success` });
     } catch (e: any) {
-        vscode.window.showErrorMessage(e.message);
+        const extraInfo = e.message === 'Failed to execute git' ? JSON.stringify({
+            gitArgs: e.gitArgs,
+            gitCommand: e.gitCommand,
+            gitErrorCode: e.gitErrorCode,
+            stderr: e.stderr,
+        }) : '';
+        vscode.window.showErrorMessage(`${e.message} ${extraInfo}`);
     }
 }
 
