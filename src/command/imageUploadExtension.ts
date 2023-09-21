@@ -46,7 +46,7 @@ class UploadImageOnDropProvider implements vscode.DocumentDropEditProvider {
         const uris: vscode.Uri[] = [];
         for (const resource of urlList.split('\n')) {
             try {
-                uris.push(vscode.Uri.parse(resource));
+                uris.push(vscode.Uri.parse(resource.replace(/[\n\t\r]/g, "").trim()));
             } catch {
                 // noop
             }
@@ -59,48 +59,61 @@ class UploadImageOnDropProvider implements vscode.DocumentDropEditProvider {
         const imageUris = uris.filter(uri => {
             const extname = path.extname(uri.path);
             return isImage(extname);
-        }).map(uri => uri.path);
-
-        console.log('upload', urlList, imageUris);
+        }).map(
+            uri => uri.path
+        );
 
         /**
          * Upload image
          * https://picgo.github.io/PicGo-Doc/en/guide/advance.html#picgo-server-usage
          */
-        const uploadRes = await axios.post('http://localhost:36677/upload', {
-            list: imageUris,
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        try {
+            const uploadRes = await axios.post('http://localhost:36677/upload', {
+                list: imageUris,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
-        console.log('upload', uploadRes);
+            const data: {
+                success: true;
+                result: string[];
+            } | {
+                success: false;
+                result: string | undefined;
+            } = uploadRes.data || {
+                success: false,
+                result: undefined,
+            };
+            const { success, result } = data;
+            if (!success) {
+                vscode.window.showErrorMessage(
+                    result || `上传图片失败，请确保picgo服务已启动`
+                );
+                return undefined;
+            }
+            const urls = result;
 
-        const data: {
-            success: true;
-            result: string[];
-        } | {
-            success: false;
-            result: undefined;
-        } = uploadRes.data;
-        const { success, result: urls } = data;
-        if (!success) {
-            return undefined;
+            // Build a snippet to insert
+            const snippet = new vscode.SnippetString();
+            urls.forEach((url, index) => {
+                snippet.appendText(url);
+                snippet.appendTabstop();
+
+                if (index <= urls.length - 1 && urls.length > 1) {
+                    snippet.appendText('\n');
+                }
+            });
+
+            return new vscode.DocumentDropEdit(snippet);
+        } catch (error) {
+            vscode.window.showErrorMessage(
+                `上传图片失败，请确保picgo服务已启动`
+            );
         }
 
-        // Build a snippet to insert
-        const snippet = new vscode.SnippetString();
-        urls.forEach((url, index) => {
-            snippet.appendText(url);
-            snippet.appendTabstop();
-
-            if (index <= urls.length - 1 && urls.length > 1) {
-                snippet.appendText('\n');
-            }
-        });
-
-        return new vscode.DocumentDropEdit(snippet);
+        return undefined;
     }
 }
 
