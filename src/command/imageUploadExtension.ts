@@ -24,6 +24,12 @@ function isImage(extname: string) {
  * - The open editors view 
  */
 class UploadImageOnDropProvider implements vscode.DocumentDropEditProvider {
+    private formatter: (urls: string[]) => string;
+
+    constructor(formatter: (urls: string[]) => string = (urls: string[]) => urls.join('\n')) {
+        this.formatter = formatter;
+    }
+
     async provideDocumentDropEdits(
         _document: vscode.TextDocument,
         _position: vscode.Position,
@@ -89,27 +95,16 @@ class UploadImageOnDropProvider implements vscode.DocumentDropEditProvider {
             const { success, result } = data;
             if (!success) {
                 vscode.window.showErrorMessage(
-                    result || `上传图片失败，请确保picgo服务已启动`
+                    `上传图片失败: ${result}`
                 );
                 return undefined;
             }
             const urls = result;
 
-            // Build a snippet to insert
-            const snippet = new vscode.SnippetString();
-            urls.forEach((url, index) => {
-                snippet.appendText(url);
-                snippet.appendTabstop();
-
-                if (index <= urls.length - 1 && urls.length > 1) {
-                    snippet.appendText('\n');
-                }
-            });
-
-            return new vscode.DocumentDropEdit(snippet);
-        } catch (error) {
+            return new vscode.DocumentDropEdit(this.formatter(urls));
+        } catch (error: any) {
             vscode.window.showErrorMessage(
-                `上传图片失败，请确保picgo服务已启动`
+                `上传图片失败，请确保picgo服务已启动: ${error?.message}`
             );
         }
 
@@ -131,7 +126,14 @@ export default function activateImageUploadExtension(context: vscode.ExtensionCo
      */
     context.subscriptions.push(
         vscode.languages.registerDocumentDropEditProvider(
-            selector, new UploadImageOnDropProvider(),
+            selector, new UploadImageOnDropProvider(
+                (urls: string[]) => {
+                    if (urls.length === 1) {
+                        return `'${urls}'`;
+                    }
+                    return `[${urls.map(url => `'${url}'`).join(',')}]`;
+                }
+            ),
         )
     );
 }
