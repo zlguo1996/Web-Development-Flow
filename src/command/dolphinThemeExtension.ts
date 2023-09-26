@@ -4,6 +4,7 @@
 
 import * as vscode from 'vscode';
 import axios from 'axios';
+import { documentSelectorJavascriptFamily } from './util';
 
 export default function activateDolphinThemeExtension(context: vscode.ExtensionContext) {
   const themeProvider = axios({
@@ -39,12 +40,7 @@ export default function activateDolphinThemeExtension(context: vscode.ExtensionC
     });
   };
 
-  context.subscriptions.push(vscode.languages.registerCompletionItemProvider([
-    'javascript',
-    'javascriptreact',
-    'typescript',
-    'typescriptreact'
-  ], {
+  context.subscriptions.push(vscode.languages.registerCompletionItemProvider(documentSelectorJavascriptFamily, {
     provideCompletionItems
   }, '.'));
 

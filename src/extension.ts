@@ -7,6 +7,7 @@ import mergeIntoFork from './command/mergeIntoFork';
 import syncFromMaster from './command/syncFromMaster';
 import activateDolphinThemeExtension from './command/dolphinThemeExtension';
 import activateImageUploadExtension from './command/imageUploadExtension';
+import activateImagePreviewOnHoverExtension from './command/imagePreviewOnHoverExtension';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -37,6 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	activateDolphinThemeExtension(context);
 	activateImageUploadExtension(context);
+	activateImagePreviewOnHoverExtension(context);
 }
 
 // this method is called when your extension is deactivated

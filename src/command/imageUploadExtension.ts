@@ -6,6 +6,7 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 import axios from 'axios';
+import { documentSelectorJavascriptFamily } from './util';
 
 const uriListMime = 'text/uri-list';
 
@@ -114,19 +115,14 @@ class UploadImageOnDropProvider implements vscode.DocumentDropEditProvider {
 
 
 export default function activateImageUploadExtension(context: vscode.ExtensionContext) {
-    const selector: vscode.DocumentSelector = [
-        'javascript',
-        'javascriptreact',
-        'typescript',
-        'typescriptreact'
-    ];
     /**
      * demo
      * https://github.com/microsoft/vscode-extension-samples/blob/main/drop-on-document/src/extension.ts
      */
     context.subscriptions.push(
         vscode.languages.registerDocumentDropEditProvider(
-            selector, new UploadImageOnDropProvider(
+            documentSelectorJavascriptFamily,
+            new UploadImageOnDropProvider(
                 (urls: string[]) => {
                     if (urls.length === 1) {
                         return `'${urls}'`;

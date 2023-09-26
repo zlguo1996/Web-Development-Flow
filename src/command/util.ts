@@ -19,3 +19,14 @@ export async function getGitRepository(repositoryName?: string) {
     if (!repository) { throw new Error(`repository not exists for path - ${repositoryUri.path} ${rootPath.path}`); };
     return repository;
 }
+
+/**
+ * 语言选择器
+ * Javascript家族
+ */
+export const documentSelectorJavascriptFamily: vscode.DocumentSelector = [
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact'
+];
