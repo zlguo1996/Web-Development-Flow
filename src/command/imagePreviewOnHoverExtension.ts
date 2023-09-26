@@ -11,12 +11,14 @@ export default function activateImagePreviewOnHoverExtension(context: vscode.Ext
             documentSelectorJavascriptFamily,
             {
                 provideHover(document, position, token) {
-                    const range = document.getWordRangeAtPosition(position, /!\[.*\]\((.*)\)/);
+                    const urlRegex = /(https?:\/\/)*[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+                    const range = document.getWordRangeAtPosition(position, urlRegex);
                     if (range) {
-                        const text = document.getText(range);
-                        const imageUrl = text.match(/!\[.*\]\((.*)\)/)?.[1];
-                        if (imageUrl) {
-                            const markdownString = new vscode.MarkdownString(`![image](${imageUrl})`);
+                        const url = document.getText(range);
+                        const imageSuffixRegex = /\.(png|jpg|jpeg|gif|webp|svg|ico|bmp|tiff|tif|jfif|ppm|pgm|pbm|pnm|ppm|xbm|xbm|xpm|xwd|x3f|x3m|x3a|x3e|x3g|x3b|x3d|x3f|x3m|x3a|x3e|x3g|x3b|x3d|x3f|x3m|x3a|x3e|x3g|x3b|x3d|x3f|x3m|x3a|x3e|x3g|x3b|x3d|x3f|x3m|x3a|x3e|x3g|x3b|x3d|x3f|x3m|x3a|x3e|x3g|x3b|x3d|x3f|x3m|x3a|x3e|x3g|x3b|x3d|x3f|x3m|x3a|x3e|x3g|x3b|x3d|x3f|x3m|x3a|x3e|x3g|x3b|x3d|x3f|x3m|x3a|x3e|x3g|x3b|x3d)$/i;
+                        const isImage = imageSuffixRegex.test(url);
+                        if (isImage) {
+                            const markdownString = new vscode.MarkdownString(`![image](${url})`);
                             return new vscode.Hover(markdownString);
                         }
                     }
